@@ -8,8 +8,16 @@ export default {
     extend: {
       colors: {
         'barbershop-blue': '#0000FF',
+        'primary': '#1a365d',
+        'secondary': '#2d3748',
+        'accent': '#4a5568',
+      },
+      fontFamily: {
+        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 } 
