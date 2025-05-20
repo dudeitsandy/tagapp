@@ -6,8 +6,12 @@ import Login from './pages/auth/Login'
 import CustomerDashboard from './pages/dashboard/CustomerDashboard'
 import BookAppointment from './pages/dashboard/BookAppointment'
 import Profile from './pages/dashboard/Profile'
+import Register from './pages/auth/Register'
 import { AuthProvider } from './contexts/AuthContext'
 import { ProtectedRoute } from './components/ProtectedRoute'
+import GuestBooking from './pages/auth/GuestBooking'
+import AppointmentConfirmation from './pages/dashboard/AppointmentConfirmation'
+import EmployeeDashboard from './pages/dashboard/EmployeeDashboard'
 
 function App() {
   return (
@@ -25,19 +29,15 @@ function App() {
                   <DashboardLayout />
                 </ProtectedRoute>
               }
-            >
-              <Route index element={<CustomerDashboard />} />
-              <Route path="book" element={<BookAppointment />} />
-              <Route path="profile" element={<Profile />} />
-              {/* Add more role-specific routes as needed */}
-            </Route>
-
+            />
+            <Route path="register" element={<Register />} />
+            <Route path="guest-booking" element={<GuestBooking />} />
             <Route path="*" element={<div>Page not found</div>} />
           </Route>
         </Routes>
       </Router>
     </AuthProvider>
-  )
+  );
 }
 
-export default App
+export default App;

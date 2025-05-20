@@ -1,11 +1,13 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import type { User, AuthResponse, UserRole } from '../types';
+import type { User, AuthResponse, UserRole, RegistrationData } from '../types';
 
 interface AuthContextType {
   user: User | null;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
+  register: (data: RegistrationData) => Promise<void>;
+  guestRegister: (data: RegistrationData) => Promise<void>;
   isAuthenticated: boolean;
 }
 
@@ -47,12 +49,42 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     localStorage.removeItem('user');
   };
 
+  const register = async (data: RegistrationData) => {
+    try {
+      const response = await mockRegister(data);
+      setUser(response.user);
+      localStorage.setItem('auth_token', response.token);
+      localStorage.setItem('user', JSON.stringify(response.user));
+    } catch (error) {
+      console.error('Registration failed:', error);
+      throw error;
+    }
+  };
+
+  const guestRegister = async (data: RegistrationData) => {
+    try {
+      // For guest registration, we'll create a temporary account
+      const response = await mockRegister({
+        ...data,
+        isGuest: true,
+      });
+      setUser(response.user);
+      localStorage.setItem('auth_token', response.token);
+      localStorage.setItem('user', JSON.stringify(response.user));
+    } catch (error) {
+      console.error('Guest registration failed:', error);
+      throw error;
+    }
+  };
+
   return (
     <AuthContext.Provider value={{
       user,
       isLoading,
       login,
       logout,
+      register,
+      guestRegister,
       isAuthenticated: !!user,
     }}>
       {children}
@@ -89,6 +121,22 @@ const mockLogin = async (email: string, password: string): Promise<AuthResponse>
       email,
       name: `Test ${role.charAt(0).toUpperCase() + role.slice(1)}`,
       role: role as UserRole,
+      createdAt: new Date().toISOString(),
+      lastLogin: new Date().toISOString(),
+    },
+    token: 'mock_jwt_token'
+  };
+};
+
+const mockRegister = async (data: RegistrationData): Promise<AuthResponse> => {
+  await new Promise(resolve => setTimeout(resolve, 1000));
+  
+  return {
+    user: {
+      id: Math.random().toString(36).substr(2, 9),
+      email: data.email,
+      name: data.name,
+      role: 'customer',
       createdAt: new Date().toISOString(),
       lastLogin: new Date().toISOString(),
     },
