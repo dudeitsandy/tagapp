@@ -13,8 +13,17 @@ export interface Appointment {
   id: string;
   customerId: string;
   barberId: string;
+  serviceId: string;
   date: string;
   status: 'scheduled' | 'completed' | 'cancelled';
+  notes?: string;
+}
+
+export interface AppointmentAction {
+  type: 'create' | 'update' | 'cancel';
+  appointment: Appointment;
+  actorId: string; // ID of user performing the action
+  timestamp: string;
 }
 
 export interface Service {

@@ -1,22 +1,34 @@
 import { useAuth } from '../../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const EmployeeDashboard = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   const mockAppointments = [
     {
       id: '1',
       date: new Date().toISOString(),
       customerName: 'John Doe',
-      status: 'scheduled'
+      status: 'scheduled',
+      serviceId: 'service1',
+      barberId: 'barber1'
     },
     {
       id: '2',
       date: new Date(Date.now() + 86400000).toISOString(),
       customerName: 'Jane Smith',
-      status: 'scheduled'
+      status: 'scheduled',
+      serviceId: 'service2',
+      barberId: 'barber1'
     }
   ];
+
+  const handleEdit = (appointment: any) => {
+    navigate('/dashboard/book', {
+      state: { appointment }
+    });
+  };
 
   return (
     <div>
@@ -34,15 +46,17 @@ const EmployeeDashboard = () => {
                     Customer: {apt.customerName}
                   </p>
                 </div>
-                <span
-                  className={`px-2 py-1 text-xs font-medium rounded-full ${
-                    apt.status === 'scheduled'
-                      ? 'bg-green-100 text-green-800'
-                      : 'bg-gray-100 text-gray-800'
-                  }`}
-                >
-                  {apt.status}
-                </span>
+                <div className="flex space-x-3">
+                  <button
+                    onClick={() => handleEdit(apt)}
+                    className="text-barbershop-blue hover:text-blue-700 text-sm font-medium"
+                  >
+                    Edit
+                  </button>
+                  <span className="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">
+                    {apt.status}
+                  </span>
+                </div>
               </div>
             </li>
           ))}

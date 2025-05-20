@@ -29,9 +29,17 @@ function App() {
                   <DashboardLayout />
                 </ProtectedRoute>
               }
-            />
+            >
+              {/* Dashboard nested routes */}
+              <Route index element={<CustomerDashboard />} />
+              <Route path="book" element={<BookAppointment />} />
+              <Route path="profile" element={<Profile />} />
+              <Route path="appointments/confirm" element={<AppointmentConfirmation />} />
+            </Route>
+
             <Route path="register" element={<Register />} />
             <Route path="guest-booking" element={<GuestBooking />} />
+
             <Route path="*" element={<div>Page not found</div>} />
           </Route>
         </Routes>
