@@ -12,14 +12,18 @@ const DashboardLayout = () => {
   const isIndexRoute = location.pathname === '/dashboard';
 
   return (
-    <div className="flex h-screen bg-gray-100">
-      <DashboardSidebar />
-      <main className="flex-1 overflow-y-auto p-8">
-        {isIndexRoute ? (
-          user?.role === 'employee' ? <EmployeeDashboard /> : <CustomerDashboard />
-        ) : (
-          <Outlet />
-        )}
+    <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
+      <div className="w-full md:w-64 flex-shrink-0">
+        <DashboardSidebar />
+      </div>
+      <main className="flex-1 overflow-y-auto p-4 md:p-8">
+        <div className="max-w-7xl mx-auto">
+          {isIndexRoute ? (
+            user?.role === 'employee' ? <EmployeeDashboard /> : <CustomerDashboard />
+          ) : (
+            <Outlet />
+          )}
+        </div>
       </main>
     </div>
   );

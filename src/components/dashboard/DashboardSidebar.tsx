@@ -42,8 +42,8 @@ const DashboardSidebar = () => {
   const currentNavigation = navigationItems[user?.role || 'customer'];
 
   return (
-    <div className="w-64 bg-white border-r border-gray-200">
-      <div className="h-full px-3 py-4 overflow-y-auto">
+    <div className="bg-white shadow-sm border-r border-gray-200 h-full md:h-screen overflow-y-auto">
+      <nav className="px-4 py-6">
         <div className="space-y-2">
           {currentNavigation.map((item) => {
             const isActive = location.pathname === item.href;
@@ -63,7 +63,7 @@ const DashboardSidebar = () => {
             );
           })}
         </div>
-      </div>
+      </nav>
     </div>
   );
 };

@@ -11,7 +11,6 @@ import { AuthProvider } from './contexts/AuthContext'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import GuestBooking from './pages/auth/GuestBooking'
 import AppointmentConfirmation from './pages/dashboard/AppointmentConfirmation'
-import EmployeeDashboard from './pages/dashboard/EmployeeDashboard'
 
 function App() {
   return (
@@ -21,24 +20,37 @@ function App() {
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Home />} />
             <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+            <Route path="guest-booking" element={<GuestBooking />} />
             
+            {/* All dashboard routes are protected and use DashboardLayout */}
             <Route
-              path="dashboard"
+              path="dashboard/*"
               element={
                 <ProtectedRoute>
                   <DashboardLayout />
                 </ProtectedRoute>
               }
             >
-              {/* Dashboard nested routes */}
               <Route index element={<CustomerDashboard />} />
               <Route path="book" element={<BookAppointment />} />
               <Route path="profile" element={<Profile />} />
               <Route path="appointments/confirm" element={<AppointmentConfirmation />} />
+              {/* Fallback for unimplemented features */}
+              <Route 
+                path="*" 
+                element={
+                  <div className="text-center py-10">
+                    <h2 className="text-xl font-semibold text-gray-600">
+                      Feature Coming Soon
+                    </h2>
+                    <p className="mt-2 text-gray-500">
+                      This feature is currently under development.
+                    </p>
+                  </div>
+                } 
+              />
             </Route>
-
-            <Route path="register" element={<Register />} />
-            <Route path="guest-booking" element={<GuestBooking />} />
 
             <Route path="*" element={<div>Page not found</div>} />
           </Route>
