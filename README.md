@@ -1,54 +1,77 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# TAG App
 
-Currently, two official plugins are available:
+TAG App is a lightweight, web-based Point-of-Sale (POS) application designed for simplicity and efficiency. Built with React, TypeScript, and Vite, it integrates with Stripe for payment processing and Twilio for SMS-based functionalities.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Modern Tech Stack**: Utilizes React with TypeScript and Vite for a fast and efficient development experience.
+- **Tailwind CSS**: For rapid UI development and responsive design.
+- **Stripe Integration**: Seamless payment processing capabilities with POS features.
+- **Twilio Integration**: SMS functionalities for notifications and verifications.
+- **Netlify Deployment**: Easily deployable with Netlify for quick previews and production builds.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Installation
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+Follow these steps to get started locally:
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+1. Clone the repository:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+   ```bash
+   git clone https://github.com/dudeitsandy/tagapp.git
+   cd tagapp
+   ```
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Set up environment variables:
+   - Create a `.env` file in the root directory.
+   - Refer to a `.env.example` file (to be created) for the required variables (e.g., Stripe/Twilio keys).
+
+4. Run the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+## Testing
+
+Instructions for testing will be provided here once testing scripts and procedures are established.
+
+## Deployment
+
+The application is configured for deployment on Netlify:
+
+- Push your code to your GitHub repository.
+- Connect the repository to Netlify.
+- Set up your environment variables in the Netlify dashboard.
+- Deploy your site.
+
+Alternatively, you can host the backend on AWS (Amplify recommended) and use the Netlify frontend.
+
+## Contributing
+
+Contributions are welcome! Please fork the repository and submit a pull request for any enhancements or bug fixes.
+
+## License
+
+proprietary software 
+
+## Contact
+
+For questions or inquiries, please contact:
+
+- Andy Styx: andy@ghostweave.com
+
+## Future Improvements
+
+- Implement Stripe POS flow with actual charge processing.
+- Integrate Twilio for phone verification and notifications.
+- Add testing scripts for CI/CD pipelines.
+- Create a `.env.example` file as a reference for required environment variables.
+
+Happy coding!
